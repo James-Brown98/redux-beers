@@ -1,7 +1,6 @@
 const request = require('superagent')
 
 function getBeers (state, dispatch){
-  dispatch({type: 'TOGGLE_LOADING'})
   request
     .get('http://rogue-beers.herokuapp.com/api/v1/beers')
     .end((err, res) => {
@@ -11,4 +10,15 @@ function getBeers (state, dispatch){
     })
 }
 
-module.exports = getBeers
+const getStyles = (state, dispatch) => {
+  dispatch({type: 'TOGGLE_STYLE'})
+
+  request
+    .get()
+}
+
+
+module.exports = {
+  getBeers,
+  getStyles
+}

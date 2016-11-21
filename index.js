@@ -1,18 +1,20 @@
-const redux = require('redux')
+const {createStore} = require('redux')
 const html = require('yo-yo')
 
 const template = require('./views/beers')
 const reducer = require('./reducer')
+const beersAPI = require('./requests/beersAPI')
+
 
 var initialState = {
   beers: [],
-  loading: false,
+  loading: true,
   showStyle: false
 }
 
-const store = redux.createStore(reducer, initialState)
+const {dispatch, getState, subscribe} = createStore(reducer, initialState)
 
-const {dispatch, getState, subscribe} = store
+beersAPI.getBeers(getState(), dispatch)
 
 const updateView = () => {
   const currentState = getState()
