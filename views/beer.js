@@ -1,16 +1,16 @@
 const html = require('yo-yo')
 
-const beer = ({beers}, dispatch) => {
-  return beers.map((beer, index) => html`
-    <li id='${index}'>
-      <div>${beer.name}</div>
-      <div>${beer.abv}</div>
-      <div>${beer.style}</div>
-      <div>${beer.brewery}</div>
-      <div>${beer.country}</div>
+module.exports = (arr) => {
+  return arr.map((beer) => html`
+    <li class='beer'>
+      <div>
+      <h3>${beer.name}</h3>
+      ${beer.abv}<br>
+      ${beer.style}<br>
+      ${beer.brewery}<br>
+      ${beer.country}
+      </div>
     </li>
     `
   )
 }
-
-module.exports = beer

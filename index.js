@@ -9,7 +9,8 @@ const beersAPI = require('./requests/beersAPI')
 var initialState = {
   beers: [],
   loading: true,
-  showStyle: false
+  showStyle: false,
+  searched: []
 }
 
 const {dispatch, getState, subscribe} = createStore(reducer, initialState)

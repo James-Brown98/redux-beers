@@ -1,11 +1,11 @@
 const clone = require('clone')
 
-const reducer = (state, action) => {
+module.exports = (state, action) => {
   const newState = clone(state)
-
-  switch(action.type){
+  const { type, payload } = action
+  switch(type){
     case 'FETCH_BEERS':
-      newState.beers = action.payload
+      newState.beers = payload
       return newState
     case 'TOGGLE_LOADING':
      newState.loading = !newState.loading
@@ -14,16 +14,12 @@ const reducer = (state, action) => {
       newState.showStyle = !newState.showStyle
       return newState
     case 'ORDER_BY_ABV':
-      newState.beers.sort(function (a, b) {
-        // a.abv > b.abv ? -1 : 1
-        if (a.abv > b.abv) return -1
-        else if(a.abv < b.abv) return 1
-        return 0
-      })
+      newState.beers.sort((a, b) => a.abv > b.abv ? -1 : 1)
+      return newState
+    case 'SEARCH_FOR_BEERS':
+      newState.searched = newState.beers.filter((beer) => beer.name.toLowerCase().includes(payload.toLowerCase()))
       return newState
     default:
       return newState
   }
 }
-
-module.exports = reducer
